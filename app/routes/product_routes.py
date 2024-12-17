@@ -1,23 +1,9 @@
-from sanic import Sanic, Blueprint
-from controllers.health_controller import HealthController
+from sanic import Blueprint
 from controllers.inventory_controller import InventoryController
-from controllers.order_controller import OrderController
 
-
-# Create Sanic app instance
-app = Sanic("my_sanic_app")
-
-health_controller = HealthController()
 inventory_controller = InventoryController()
-order_controller = OrderController()
 
 PRODUCT_ROUTES = Blueprint("product_api", url_prefix="/products")
-
-
-# health check
-@app.get("/ping")
-async def health_check(request):
-    return health_controller.health_check(request)
 
 # Create a new product
 @PRODUCT_ROUTES.route(methods=["POST"])
